@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-import {HTTPServer, Router} from './HTTPServer';
+import {HTTPServer, Router} from 'http-server-react-native';
 
 const App = () => {
   const [endpoint, setEndpint] = useState('');
