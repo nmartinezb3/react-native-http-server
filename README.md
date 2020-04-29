@@ -1,4 +1,5 @@
 # react-native-http-server
+An HTTP server for react native based on https://github.com/swisspol/GCDWebServer
 
 ## Getting started
 
