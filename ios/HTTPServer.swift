@@ -1,8 +1,9 @@
 //
-//  HTTPServer.swift
-//  HTTPServer
+//  HttpServer.swift
+//  RNHttpServer
 //
-//  Created by Nicolas Martinez on 4/28/20.
+//  Created by Nicolas Martinez on 4/29/20.
+//  Copyright © 2020 Facebook. All rights reserved.
 //
 
 import Foundation
@@ -10,7 +11,6 @@ import Foundation
 
 @objc(WebServerManager)
 class WebServerManager: RCTEventEmitter {
-    
   private enum ServerState {
     case Stopped
     case Running
@@ -24,9 +24,9 @@ class WebServerManager: RCTEventEmitter {
     super.init()
   }
 
-  @objc static override func requiresMainQueueSetup() -> Bool {
-    return true
-  }
+//  @objc static override func requiresMainQueueSetup() -> Bool {
+//    return true
+//  }
   
   override func supportedEvents() -> [String]! {
     return ["GET", "POST", "PUT", "PATCH", "DELETE"]
