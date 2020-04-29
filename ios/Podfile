@@ -77,6 +77,8 @@ target 'HTTPServer' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
+  pod "GCDWebServer", "~> 3.5.3"
+
   target 'HTTPServerTests' do
     inherit! :complete
     # Pods for testing

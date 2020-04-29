@@ -1,7 +1,17 @@
 {
-  "name": "HTTPServer",
+  "name": "react-native-http-server",
   "version": "0.0.1",
-  "private": true,
+  "description": "HTTP server for React Native",
+  "author": "Nicolas Martinez",
+  "license": "MIT",
+  "homepage": "https://github.com/nmartinezb3/react-native-http-server.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nmartinezb3/react-native-http-server.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nmartinezb3/react-native-http-server/issues"
+  },
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",

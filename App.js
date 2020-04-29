@@ -1,113 +1,104 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
-import React from 'react';
+import React, {useState} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
-  ScrollView,
   View,
   Text,
   StatusBar,
+  TouchableOpacity,
 } from 'react-native';
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import {HTTPServer, Router} from './HTTPServer';
 
-const App: () => React$Node = () => {
+const App = () => {
+  const [endpoint, setEndpint] = useState('');
+  const [isServerRunning, setServerState] = useState(false);
+
+  let server;
+  const startServer = () => {
+    server = new HTTPServer({port: 8080});
+    const router = new Router('/coso');
+    router
+      .get((error, data) => {
+        console.log('GET method');
+        return {status: 200, data: {success: true, value: 'get'}};
+      })
+      .post((error, data) => {
+        console.log('POST method');
+        return {status: 200, data: {success: true, value: 'post'}};
+      })
+      .put((error, data) => {
+        console.log('PUT method');
+        return {status: 200, data: {success: true, value: 'put'}};
+      });
+
+    server.registerRouter(router);
+    server
+      .start()
+      .then(() => {
+        setServerState(true);
+      })
+      .catch(err => console.error(err));
+  };
+
+  const stopServer = () => {
+    server.stop();
+    setEndpint('');
+    setServerState(false);
+  };
+
   return (
     <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <Header />
-          {global.HermesInternal == null ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.js</Text> to change this
-                screen and then come back to see your edits.
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
+      <StatusBar barStyle="light-content" />
+      <SafeAreaView style={styles.safeView}>
+        <View style={styles.infoBlock}>
+          <Text style={styles.text}>
+            Press button to turn {isServerRunning ? 'Off' : 'On'} server
+          </Text>
+        </View>
+        <View style={styles.container}>
+          <TouchableOpacity
+            onPress={() => (isServerRunning ? stopServer() : startServer())}>
+            <Text>{isServerRunning ? 'RUNNING' : 'STOPED'}</Text>
+          </TouchableOpacity>
+        </View>
+        {isServerRunning ? (
+          <View style={styles.container}>
+            <Text style={{...styles.text, ...styles.urlEndpoint}}>
+              Server is available at this Url : {endpoint}
+            </Text>
           </View>
-        </ScrollView>
+        ) : (
+          <View style={styles.container} />
+        )}
       </SafeAreaView>
     </>
   );
 };
 
 const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
+  safeView: {
+    backgroundColor: '#282c34',
+    height: '100%',
   },
-  engine: {
-    position: 'absolute',
-    right: 0,
+  urlEndpoint: {
+    paddingTop: 20,
   },
-  body: {
-    backgroundColor: Colors.white,
+  text: {
+    color: '#FFF',
+    fontWeight: '900',
+    fontSize: 20,
+    textAlign: 'center',
   },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  infoBlock: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 
