@@ -1,16 +1,14 @@
-
 # react-native-http-server
 
 ## Getting started
 
-`$ npm install react-native-http-server --save`
+`$ npm install http-server-react-native --save`
 
 ### Mostly automatic installation
 
-`$ react-native link react-native-http-server`
+`$ react-native link http-server-react-native`
 
 ### Manual installation
-
 
 #### iOS
 
@@ -21,33 +19,48 @@
 
 #### Android
 
-1. Open up `android/app/src/main/java/[...]/MainActivity.java`
-  - Add `import com.reactlibrary.RNHttpServerPackage;` to the imports at the top of the file
-  - Add `new RNHttpServerPackage()` to the list returned by the `getPackages()` method
-2. Append the following lines to `android/settings.gradle`:
-  	```
-  	include ':react-native-http-server'
-  	project(':react-native-http-server').projectDir = new File(rootProject.projectDir, 	'../node_modules/react-native-http-server/android')
-  	```
-3. Insert the following lines inside the dependencies block in `android/app/build.gradle`:
-  	```
-      compile project(':react-native-http-server')
-  	```
-
-#### Windows
-[Read it! :D](https://github.com/ReactWindows/react-native)
-
-1. In Visual Studio add the `RNHttpServer.sln` in `node_modules/react-native-http-server/windows/RNHttpServer.sln` folder to their solution, reference from their app.
-2. Open up your `MainPage.cs` app
-  - Add `using Http.Server.RNHttpServer;` to the usings at the top of the file
-  - Add `new RNHttpServerPackage()` to the `List<IReactPackage>` returned by the `Packages` method
-
+Not supported yet
 
 ## Usage
-```javascript
-import RNHttpServer from 'react-native-http-server';
 
-// TODO: What to do with the module?
-RNHttpServer;
+```javascript
+import React, { Component } from 'react';
+import { HttpServer, Router }  from 'http-server-react-native';
+
+class Server extends Component {
+
+  componentDidMount() {
+     const router = new Router('/path');
+     router
+      .get(data => {
+        return { status: 200, data: { some: 'data' } };
+      })
+      .post(data => {
+        return { status: 200, data: { some: 'data'} };
+      })
+      .put(data => {
+        return { status: 200, data: { some: 'data'} };
+      })
+      .patch(data => {
+        return { status: 200, data: { some: 'data'} };
+      })
+      .delete(data => {
+        return { status: 200, data: { some: 'data'} };
+      })
+
+      this.server = new HTTPServer({ port: 8080 });
+      this.server.registerRouter(router);
+      this.server
+        .start()
+        .then(url => console.log(`Server running on ${url}`)
+        .catch(err => console.error(err));
+    }
+
+    componentWillUnmount() {
+      this.server.stop()
+    }
+
+    ...
+}
+;
 ```
-  
