@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		036780A32459DC6800B5890A /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 036780942459DC5400B5890A /* libReact.a */; };
-		036780A62459DD0400B5890A /* HttpServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036780A52459DD0400B5890A /* HttpServer.swift */; };
-		036780A82459DD2100B5890A /* HttpServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 036780A72459DD2100B5890A /* HttpServer.m */; };
+		036780A62459DD0400B5890A /* RNHttpServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036780A52459DD0400B5890A /* RNHttpServer.swift */; };
+		036780A82459DD2100B5890A /* RNHttpServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 036780A72459DD2100B5890A /* RNHttpServer.m */; };
 		84A015FDCFC983916059C528 /* Pods_RNHttpServer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7F0BA0FE09CD641FEF12494 /* Pods_RNHttpServer.framework */; };
 /* End PBXBuildFile section */
 
@@ -87,8 +87,8 @@
 /* Begin PBXFileReference section */
 		036780882459DC5300B5890A /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		036780A42459DD0300B5890A /* RNHttpServer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RNHttpServer-Bridging-Header.h"; sourceTree = "<group>"; };
-		036780A52459DD0400B5890A /* HttpServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpServer.swift; sourceTree = "<group>"; };
-		036780A72459DD2100B5890A /* HttpServer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HttpServer.m; sourceTree = "<group>"; };
+		036780A52459DD0400B5890A /* RNHttpServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNHttpServer.swift; sourceTree = "<group>"; };
+		036780A72459DD2100B5890A /* RNHttpServer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNHttpServer.m; sourceTree = "<group>"; };
 		134814201AA4EA6300B7C361 /* libRNHttpServer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNHttpServer.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0CC1A90C897E3827842046F /* Pods-RNHttpServer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNHttpServer.release.xcconfig"; path = "Target Support Files/Pods-RNHttpServer/Pods-RNHttpServer.release.xcconfig"; sourceTree = "<group>"; };
 		D7F0BA0FE09CD641FEF12494 /* Pods_RNHttpServer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RNHttpServer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -143,8 +143,8 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
-				036780A72459DD2100B5890A /* HttpServer.m */,
-				036780A52459DD0400B5890A /* HttpServer.swift */,
+				036780A72459DD2100B5890A /* RNHttpServer.m */,
+				036780A52459DD0400B5890A /* RNHttpServer.swift */,
 				134814211AA4EA7D00B7C361 /* Products */,
 				036780872459DC5300B5890A /* Frameworks */,
 				036780A42459DD0300B5890A /* RNHttpServer-Bridging-Header.h */,
@@ -158,7 +158,6 @@
 				F91BACBD920AB903C88E149F /* Pods-RNHttpServer.debug.xcconfig */,
 				A0CC1A90C897E3827842046F /* Pods-RNHttpServer.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -311,8 +310,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				036780A62459DD0400B5890A /* HttpServer.swift in Sources */,
-				036780A82459DD2100B5890A /* HttpServer.m in Sources */,
+				036780A62459DD0400B5890A /* RNHttpServer.swift in Sources */,
+				036780A82459DD2100B5890A /* RNHttpServer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
