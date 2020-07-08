@@ -64,12 +64,12 @@ class WebServerManager: RCTEventEmitter {
    Start `webserver` on the Main Thread
   - Returns:`Promise` to JS side, resolve the server URL and reject thrown errors
    */
-  @objc public func startServer(_ resolve: RCTPromiseResolveBlock, rejecter reject: RCTPromiseRejectBlock) -> Void {
+  @objc public func startServer(_ port: NSInteger, resolver resolve: RCTPromiseResolveBlock, rejecter reject: RCTPromiseRejectBlock) -> Void {
      if (serverRunning == ServerState.Stopped){
-       DispatchQueue.main.sync{
+       DispatchQueue.main.sync {
            serverRunning = ServerState.Running
-           webServer.start(withPort: 8080, bonjourName: "React Native Web Server")
-           resolve(webServer.serverURL?.absoluteString )
+           webServer.start(withPort: UInt(port), bonjourName: "React Native Web Server")
+           resolve(webServer.serverURL?.absoluteString)
        }
      } else {
        let errorMessage : String = "Server start failed"

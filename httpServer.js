@@ -51,7 +51,7 @@ export class HTTPServer {
   }
 
   start() {
-    return WebServerManager.startServer();
+    return WebServerManager.startServer(this.port);
   }
 
   stop() {

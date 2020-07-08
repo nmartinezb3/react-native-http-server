@@ -9,7 +9,8 @@
 
 @interface RCT_EXTERN_MODULE(WebServerManager, NSObject)
 RCT_EXTERN_METHOD(initWebServer)
-RCT_EXTERN_METHOD(startServer: (RCTPromiseResolveBlock) resolve
+RCT_EXTERN_METHOD(startServer: (NSInteger *) port
+                  resolver: (RCTPromiseResolveBlock) resolve
                   rejecter: (RCTPromiseRejectBlock)reject)
 RCT_EXTERN_METHOD(createServer: (RCTPromiseResolveBlock) resolve
                   rejecter: (RCTPromiseRejectBlock)reject)
