@@ -24,9 +24,9 @@ class WebServerManager: RCTEventEmitter {
     super.init()
   }
 
-//  @objc static override func requiresMainQueueSetup() -> Bool {
-//    return true
-//  }
+  @objc static override func requiresMainQueueSetup() -> Bool {
+    return true
+  }
   
   override func supportedEvents() -> [String]! {
     return ["GET", "POST", "PUT", "PATCH", "DELETE"]
@@ -53,10 +53,15 @@ class WebServerManager: RCTEventEmitter {
   
  
   @objc public func subscribe(_ method: String) {
-    webServer.addDefaultHandler(forMethod: method, request: GCDWebServerRequest.self) { (request, completionBlock) in
+    webServer.addDefaultHandler(forMethod: method, request: GCDWebServerDataRequest.self) { (request, completionBlock) in
       let requestId = NSString(string: UUID().uuidString)
+      let requestBodyData = (request as! GCDWebServerDataRequest).data;
+      let requestBodyString = NSString(data: requestBodyData, encoding: String.Encoding.utf8.rawValue);
       self.completionBlocks.setObject(completionBlock, forKey: requestId)
-      self.sendEvent(withName: method, body: requestId)
+      self.sendEvent(withName: method, body: [
+        "requestId": requestId,
+        "body": requestBodyString,
+      ])
     }
   }
   
@@ -64,12 +69,12 @@ class WebServerManager: RCTEventEmitter {
    Start `webserver` on the Main Thread
   - Returns:`Promise` to JS side, resolve the server URL and reject thrown errors
    */
-  @objc public func startServer(_ resolve: RCTPromiseResolveBlock, rejecter reject: RCTPromiseRejectBlock) -> Void {
+  @objc public func startServer(_ port: NSInteger, resolver resolve: RCTPromiseResolveBlock, rejecter reject: RCTPromiseRejectBlock) -> Void {
      if (serverRunning == ServerState.Stopped){
-       DispatchQueue.main.sync{
+       DispatchQueue.main.sync {
            serverRunning = ServerState.Running
-           webServer.start(withPort: 8080, bonjourName: "React Native Web Server")
-           resolve(webServer.serverURL?.absoluteString )
+           webServer.start(withPort: UInt(port), bonjourName: "React Native Web Server")
+           resolve(webServer.serverURL?.absoluteString)
        }
      } else {
        let errorMessage : String = "Server start failed"

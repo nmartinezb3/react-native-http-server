@@ -51,7 +51,7 @@ export class HTTPServer {
   }
 
   start() {
-    return WebServerManager.startServer();
+    return WebServerManager.startServer(this.port);
   }
 
   stop() {
@@ -64,10 +64,9 @@ export class HTTPServer {
       WebServerManager.subscribe(eventName);
       this.subscription = this.eventEmitter.addListener(
         eventName,
-        requestId => {
-          const {data, status} = handler('', data);
-          console.log(requestId);
-          WebServerManager.response(requestId, status, JSON.stringify(data));
+        ({requestId, body}) => {
+          const {data, status} = handler(body);
+          WebServerManager.response(requestId, status, data);
         },
       );
     });

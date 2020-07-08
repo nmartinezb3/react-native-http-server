@@ -12,13 +12,12 @@ Pod::Spec.new do |s|
   s.author             = { "author" => "hi@nmartinez.dev" }
   s.platform     = :ios, "7.0"
   s.source       = { :git => "https://github.com/nmartinezb3/react-native-http-server.git", :tag => "master" }
-  s.source_files  = "RNHttpServer/**/*.{h,m}"
+  s.source_files  = "ios/**/*.{h,m,swift}"
   s.requires_arc = true
 
 
   s.dependency "React"
   #s.dependency "others"
-
+  s.dependency "GCDWebServer", "~> 3.5.3"
 end
 
-  
